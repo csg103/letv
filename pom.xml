@@ -58,12 +58,12 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!-- 安全框架 Spring Security -->
+		<!-- 安全框架 Spring Security
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+ -->
 		<!-- 移除 Tomcat 连接池，使用 HikariCP  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,7 +75,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<!--启用不严格检查html-->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.22</version>
+		</dependency>
 		<!-- 移除 tomcat-jdbc, Spring Boot 将会自动使用 HikariCP -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
@@ -178,6 +183,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.9.RELEASE</version>
 		</dependency>
 	</dependencies>
 
