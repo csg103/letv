@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/carousel.css"/>
+    <link rel="stylesheet" href="css/docs.min.css"/>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #f1f1f1; padding-bottom: 0">
+<div th:replace="header :: nav"></div>
+
+
+<!--开始轮播 -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px">
+    <!-- 轮播（Carousel）指标 -->
+    <ol class="carousel-indicators">
+        <li th:each="carouselPic,iterStat:${carouselPics}" data-target="#myCarousel"
+            th:data-slide-to="${iterStat.index}" th:class="(${iterStat.index}==0)?'active':''">
+        </li>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <div class="carousel-inner text-center" role="listbox">
+        <div th:each="carouselPic,iterStat:${carouselPics}" th:class="(${iterStat.index}==0)?'item active':'item'">
+            <a th:href="@{/play(v=${carouselPic.value})}">
+                <img th:src="${carouselPic.image}" alt="">
+                <div class="carousel-caption" th:utext="${carouselPic.title}"></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 轮播（Carousel）导航 -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!--  轮播结束 -->
+
+<!-- 综艺开始 -->
+<div class="row">
+    <div class="bs-callout bs-callout-danger">
+        <h4 style="display: inline-block">综艺</h4>
+        <button type="button" class="btn  btn-info pull-right refresh" value="5">
+            <span class="glyphicon glyphicon-refresh"></span> 换一批
+        </button>
+    </div>
+</div>
+
+<div class="col-md-2 col-sm-4 col-xs-6 videoItem" th:each="recommend, iterStat:${carouselPics}">
+    <a th:href="@{/play(v=${recommend.value})}" th:if="${iterStat.index} < 6" class="videoUrl">
+        <img th:src="${recommend.image}" alt="" class="img-responsive img-thumbnail videoImage">
+        <div class="caption">
+            <p class="text-left videoTitle" th:text="${recommend.title}"></p>
+        </div>
+    </a>
+    <div th:if="${iterStat.index} >= 6" hidden>
+        <ul class="videoImage">[[${recommend.image}]]</ul>
+        <ul class="videoTitle">[[${recommend.title}]]</ul>
+        <a th:href="@{/play(v=${recommend.value})}" class="videoUrl"></a>
+    </div>
+</div>
+
+
+</body>
+</html>
